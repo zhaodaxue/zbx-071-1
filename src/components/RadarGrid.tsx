@@ -4,7 +4,7 @@ import RadarChart from './RadarChart';
 import { formatDateDisplay } from '@/utils/calculations';
 
 export default function RadarGrid() {
-  const { dailyData, zoomedDate, setZoomedDate, selectedDate } = useAppStore();
+  const { dailyData, zoomedDate, setZoomedDate, selectedDate, setSelectedDate } = useAppStore();
 
   const zoomedData = zoomedDate
     ? dailyData.find((d) => d.date === zoomedDate)
@@ -45,7 +45,7 @@ export default function RadarGrid() {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-7 gap-3">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
           {dailyData.map((dayData, index) => (
             <div
               key={dayData.date}
@@ -69,7 +69,10 @@ export default function RadarGrid() {
               <RadarChart
                 data={dayData}
                 size="small"
-                onClick={() => setZoomedDate(dayData.date)}
+                onClick={() => {
+                  setZoomedDate(dayData.date);
+                  setSelectedDate(dayData.date);
+                }}
                 isSelected={dayData.date === selectedDate}
               />
             </div>

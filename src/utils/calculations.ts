@@ -58,8 +58,7 @@ export function formatDateDisplay(dateStr: string): string {
   return `${month}/${day} ${weekday}`;
 }
 
-export function isDateWarning(dailyData: DailyData, date: string): boolean {
-  const dayData = dailyData;
-  if (!dayData) return false;
-  return dayData.readings.some((r) => r.value < WARNING_THRESHOLD);
+export function isDateWarning(dailyData: DailyData): boolean {
+  if (!dailyData) return false;
+  return dailyData.readings.some((r) => r.value < WARNING_THRESHOLD);
 }
